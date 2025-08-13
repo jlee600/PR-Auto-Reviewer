@@ -2,6 +2,7 @@ import argparse, os
 from utils.diff_utils import load_diff_from_file, parse_unified_diff
 from agents.context_agent import build_context
 from agents.lint_agent import run_static_checks
+from agents.fix_agent import propose_patches
 
 def main():
     p = argparse.ArgumentParser()
@@ -27,6 +28,17 @@ def main():
         else:
             for fd in findings:
                 f.write(f"- {fd['type']} in {fd['file']}: {fd['msg']}\n")
+
+        patches = propose_patches(ctx, findings)
+        f.write("\nPatch suggestions:\n")
+        if not patches:
+            f.write("- none\n")
+        else:
+            for s in patches:
+                f.write(f"\n[{s['file']}] {s['rationale']}\n")
+                f.write("```diff\n")
+                f.write(s["content"])
+                f.write("```\n")
 
     print(f"parsed {len(files)} file(s). wrote out/report.md")
 
