@@ -1,3 +1,3 @@
 # Report
 
-Loaded diff from: samples/sample.diff
+Files changed: ['example.py']

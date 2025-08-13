@@ -1,1 +1,14 @@
-dummy
+diff --git a/example.py b/example.py
+index e69de29..b1d2f1a 100644
+--- a/example.py
++++ b/example.py
+@@
++def add(a, b):
++    print("adding", a, b)
++    try:
++        return a + b
++    except:
++        return None
++
++def extra():
++    pass
