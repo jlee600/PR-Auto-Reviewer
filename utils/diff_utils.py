@@ -30,9 +30,9 @@ def parse_unified_diff(diff_text: str) -> List[Dict]:
         new_path = None
         for line in body.splitlines():
             if line.startswith("--- "):
-                old_path = line[4:].strip()  # like "a/file.py"
+                old_path = line[4:].strip()  # "a/file.py"
             if line.startswith("+++ "):
-                new_path = line[4:].strip()  # like "b/file.py"
+                new_path = line[4:].strip()  # "b/file.py"
 
         # Prefer the "b/" path since it points at the new file
         if new_path and new_path.startswith("b/"):
